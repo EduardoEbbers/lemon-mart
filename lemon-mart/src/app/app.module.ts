@@ -21,15 +21,15 @@ import { HttpClientModule } from '@angular/common/http';
     PageNotFoundComponent
   ],
   imports: [
+    MaterialModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     FlexLayoutModule,
     //ManagerModule,
-    InventoryModule,
-    PosModule,
-    UserModule,
+    //InventoryModule,
+    //PosModule,
+    //UserModule,
     HttpClientModule
   ],
   providers: [],
