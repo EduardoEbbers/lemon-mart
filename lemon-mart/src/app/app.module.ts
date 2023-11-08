@@ -26,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    ManagerModule,
+    //ManagerModule,
     InventoryModule,
     PosModule,
     UserModule,
