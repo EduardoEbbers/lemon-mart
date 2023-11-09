@@ -7,6 +7,7 @@ import { ManagerComponent } from './manager.component';
 import { MaterialModule } from '../material.module';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.componen
   imports: [
     CommonModule,
     ManagerRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ]
 })
 export class ManagerModule { }
