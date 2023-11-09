@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Role } from './auth.enum';
 import { BehaviorSubject, Observable, catchError, filter, flatMap, map, tap, throwError } from 'rxjs';
 import { IUser, User } from '../user/user/user';
-import * as decode from 'jwt-decode';
 import { transformError } from '../common/common';
 import { CacheService } from './cache.service';
+import { jwtDecode } from 'jwt-decode';
 
 export interface IAuthStatus {
   isAuthenticated: boolean;
@@ -46,7 +46,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
       .pipe(
         map(value => {
           this.setToken(value.accessToken);
-          const token = decode(value.accessToken);
+          const token = jwtDecode(value.accessToken);
           return this.transformJwtToken(token);
         }),
         tap(status => this.authStatus$.next(status)),
