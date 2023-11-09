@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, catchError, filter, flatMap, map, tap, thr
 import { IUser, User } from '../user/user/user';
 import * as decode from 'jwt-decode';
 import { transformError } from '../common/common';
+import { CacheService } from './cache.service';
 
 export interface IAuthStatus {
   isAuthenticated: boolean;
@@ -30,16 +31,21 @@ export interface IAuthService {
 }
 
 @Injectable()
-export abstract class AuthService implements IAuthService {
+export abstract class AuthService extends CacheService implements IAuthService {
   readonly authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus);
   readonly currentUser$ = new BehaviorSubject<IUser>(new User());
 
-  constructor() { }
+  constructor() { 
+    super();
+  }
 
   login(email: string, password: string): Observable<void> {
+    this.clearToken();
+
     const loginResponse$ = this.authProvider(email, password)
       .pipe(
         map(value => {
+          this.setToken(value.accessToken);
           const token = decode(value.accessToken);
           return this.transformJwtToken(token);
         }),
@@ -61,11 +67,22 @@ export abstract class AuthService implements IAuthService {
   }
 
   logout(clearToken?: boolean | undefined): void {
+    if(clearToken) {
+      this.clearToken();
+    }
     setTimeout(() => this.authStatus$.next(defaultAuthStatus), 0);
   }
 
   getToken(): string {
-    throw new Error('Method not implemented.');
+    return this.getItem('jwt') ?? '';
+  }
+
+  protected setToken(jwt: string) {
+    this.setItem('jwt', jwt);
+  }
+
+  protected clearToken() {
+    this.removeItem('jwt');
   }
 
   protected abstract authProvider(email: string, password: string): Observable<IServerAuthResponse>;
