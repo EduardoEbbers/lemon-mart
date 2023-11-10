@@ -14,7 +14,7 @@ export class HomeComponent {
   //constructor(private authService: AuthService, private router: Router) { }
   constructor(public authService: AuthService, private router: Router) { }
 
-
+  /*
   login() {
     this.authService.login('manager@test.com', '12345678');
     
@@ -26,4 +26,5 @@ export class HomeComponent {
       tap(([authStatus, user]) => this.router.navigate(['/manager']))
     ).subscribe();
   }
+  */
 }

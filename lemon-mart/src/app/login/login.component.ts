@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, combineLatest, filter, tap } from 'rxjs';
 import { EmailValidation, PasswordValidation } from '../common/validations';
+import { UiService } from '../common/ui.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,13 @@ export class LoginComponent implements OnInit {
   loginError = '';
   redirectUrl: string = '';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private formBuilder: FormBuilder, 
+    private authService: AuthService, 
+    private router: Router, 
+    private route: ActivatedRoute, 
+    private uiService: UiService
+  ) {
     this.subs.sink = route.paramMap
       .subscribe(params => (this.redirectUrl = params.get('redirectUrl') ?? ''));
   }
@@ -46,7 +53,9 @@ export class LoginComponent implements OnInit {
       this.authService.currentUser$
     ]).pipe(
       filter(([authStatus, user]) => authStatus.isAuthenticated && user?._id !== ''),
-      tap(([authStatus, user]) => this.router.navigate([this.redirectUrl || '/manager']))
+      tap(([authStatus, user]) => this.router.navigate([this.redirectUrl || '/manager'])),
+      tap(([authStatus, user]) => this.uiService.showToast(`Welcome ${user.fullName}! Role: ${user.role}`)),
+      //tap(([authStatus, user]) => this.uiService.showDialog(`Welcome ${user.fullName}!`, `Role: ${user.role}`))
     ).subscribe();
   }
 }

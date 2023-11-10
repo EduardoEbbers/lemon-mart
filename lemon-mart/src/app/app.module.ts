@@ -18,13 +18,15 @@ import { InMemoryAuthService } from './auth/in-memory-auth/auth.inmemory.service
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SimpleDialogComponent } from './common/simple-dialog/simple-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    SimpleDialogComponent
   ],
   imports: [
     MaterialModule,
