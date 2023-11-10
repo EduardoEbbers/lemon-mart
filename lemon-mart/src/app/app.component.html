@@ -1,3 +1,4 @@
+<!--
 <mat-toolbar color="primary" 
     fxLayoutGap="8px"
     *ngIf="{
@@ -8,6 +9,8 @@
       *ngIf="auth?.status?.isAuthenticated">
     <mat-icon>menu</mat-icon>
   </button>
+  -->
+
   <!--
   <mat-icon svgIcon="lemon"></mat-icon>
   <a mat-button routerLink="/home">
@@ -15,11 +18,14 @@
   </a>
   <span class="flex-spacer"></span>
   -->
+
+  <!--
   <a mat-icon-button routerLink="/home">
     <mat-icon svgIcon="lemon"></mat-icon>
     <span class="mat-h2">LemonMart</span>
   </a>
   <span class="flex-spacer"></span>
+-->
 
   <!--
   <button mat-icon-button>
@@ -29,6 +35,8 @@
     <mat-icon>lock_open</mat-icon>
   </button>
   -->
+
+  <!--
   <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/profile" matTooltip="Profile" aria-label="User Profile">
     <img *ngIf="auth?.user?.picture" [src]="auth?.user?.picture" class="image-cropper" />
     <mat-icon *ngIf="!auth?.user?.picture">account_circle</mat-icon>
@@ -38,3 +46,101 @@
   </button>
 </mat-toolbar>
 <router-outlet></router-outlet>
+-->
+
+
+
+<div class="app-container">
+  <mat-toolbar color="primary" 
+      fxLayoutGap="8px"
+      class="app-toolbar"
+      [class.app-is-mobile]="media.isActive('xs')"
+      *ngIf="{
+        status: authService.authStatus$ | async,
+        user: authService.currentUser$ | async
+      } as auth;">
+    <button mat-icon-button
+        (click)="sidenav.toggle()"
+        *ngIf="auth?.status?.isAuthenticated">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <a mat-icon-button routerLink="/home">
+      <mat-icon svgIcon="lemon"></mat-icon>
+      <span class="mat-h2">LemonMart</span>
+    </a>
+    
+    <span class="flex-spacer"></span>
+
+    <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/profile" matTooltip="Profile" aria-label="User Profile">
+      <img *ngIf="auth?.user?.picture" [src]="auth?.user?.picture" class="image-cropper" />
+      <mat-icon *ngIf="!auth?.user?.picture">account_circle</mat-icon>
+    </button>
+    <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/logout" matTooltip="Logout" aria-label="Logout">
+      <mat-icon>lock_open</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="app-sidenav-container">
+    <mat-sidenav #sidenav
+        [mode]="media.isActive('xs') ? 'over': 'side'"
+        [fixedInViewport]="media.isActive('xs')"
+        fixedTopGap="56"
+        [(opened)]="opened">
+      <app-navigation-menu></app-navigation-menu>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+<!--
+<mat-toolbar color="primary" 
+    fxLayoutGap="8px"
+    *ngIf="{
+      status: authService.authStatus$ | async,
+      user: authService.currentUser$ | async
+    } as auth;">
+  <button mat-icon-button
+      *ngIf="auth?.status?.isAuthenticated">
+    <mat-icon>menu</mat-icon>
+  </button>
+  -->
+
+  <!--
+  <mat-icon svgIcon="lemon"></mat-icon>
+  <a mat-button routerLink="/home">
+    <h1>LemonMart</h1>
+  </a>
+  <span class="flex-spacer"></span>
+  -->
+
+  <!--
+  <a mat-icon-button routerLink="/home">
+    <mat-icon svgIcon="lemon"></mat-icon>
+    <span class="mat-h2">LemonMart</span>
+  </a>
+  <span class="flex-spacer"></span>
+-->
+
+  <!--
+  <button mat-icon-button>
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon>lock_open</mat-icon>
+  </button>
+  -->
+
+  <!--
+  <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/profile" matTooltip="Profile" aria-label="User Profile">
+    <img *ngIf="auth?.user?.picture" [src]="auth?.user?.picture" class="image-cropper" />
+    <mat-icon *ngIf="!auth?.user?.picture">account_circle</mat-icon>
+  </button>
+  <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/logout" matTooltip="Logout" aria-label="Logout">
+    <mat-icon>lock_open</mat-icon>
+  </button>
+</mat-toolbar>
+<router-outlet></router-outlet>
+-->
