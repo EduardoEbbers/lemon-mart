@@ -16,12 +16,15 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 import { InMemoryAuthService } from './auth/in-memory-auth/auth.inmemory.service';
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
+import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     MaterialModule,
@@ -29,6 +32,8 @@ import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     //ManagerModule,
     //InventoryModule,
     //PosModule,
