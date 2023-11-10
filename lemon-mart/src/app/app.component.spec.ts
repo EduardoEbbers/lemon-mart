@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     //imports: [RouterTestingModule],
-    imports: [commonTestingModules],
+    imports: commonTestingModules,
     declarations: [AppComponent],
     providers: commonTestingProviders.concat([
       { provide: MediaObserver, useClass: MediaObserverFake },

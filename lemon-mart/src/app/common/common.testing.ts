@@ -7,6 +7,9 @@ import { MaterialModule } from "../material.module";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { AuthService } from "../auth/auth.service";
+import { autoSpyObj } from 'angular-unit-test-helper';
+import { UiService } from "./ui.service";
 
 const FAKE_SVGS = {
     lemon: '<svg><path id="lemon" name="lemon"></path></svg>'
@@ -60,7 +63,8 @@ export class DomSanitizerFake {
 }
 
 export const commonTestingProviders: any[] = [
-    //Intentionally Left Blank!!!
+    { provide: AuthService, userValue: autoSpyObj(AuthService) },
+    { provide: AuthService, userValue: autoSpyObj(UiService) },
 ];
 
 export const commonTestingModules: any[] = [
@@ -69,4 +73,4 @@ export const commonTestingModules: any[] = [
     NoopAnimationsModule,
     HttpClientTestingModule,
     RouterTestingModule
-]
+];
