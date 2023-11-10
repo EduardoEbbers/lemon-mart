@@ -40,7 +40,7 @@ export class InMemoryAuthService extends AuthService {
     console.warn("You're using the InMemoryAuthService. Do not use this service in production.");
   }
 
-  protected override authProvider(email: string, password: string): Observable<IServerAuthResponse> {
+  protected authProvider(email: string, password: string): Observable<IServerAuthResponse> {
     email = email.toLowerCase();
     if(!email.endsWith('@test.com')) {
       return throwError('Failed to login! Email needs to end with @test.com');
@@ -64,11 +64,11 @@ export class InMemoryAuthService extends AuthService {
     return of(authResponse);
   }
 
-  protected override transformJwtToken(token: IAuthStatus): IAuthStatus {
+  protected transformJwtToken(token: IAuthStatus): IAuthStatus {
     return token;
   }
 
-  protected override getCurrentUser(): Observable<IUser> {
+  protected getCurrentUser(): Observable<IUser> {
       return of(this.defaultUser);
   }
 }

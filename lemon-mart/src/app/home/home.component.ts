@@ -13,7 +13,7 @@ export class HomeComponent {
 
   login() {
     this.authService.login('manager@test.com', '12345678');
-
+    
     combineLatest([
       this.authService.authStatus$,
       this.authService.currentUser$

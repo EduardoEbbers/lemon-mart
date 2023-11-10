@@ -1,5 +1,3 @@
-import { Injectable } from '@angular/core';
-
 export abstract class CacheService {
   protected getItem<T>(key: string): T | null {
     const data = localStorage.getItem(key);

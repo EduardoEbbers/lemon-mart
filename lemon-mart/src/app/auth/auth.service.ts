@@ -90,7 +90,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
     return loginResponse$;
   }
 
-  logout(clearToken?: boolean | undefined): void {
+  logout(clearToken?: boolean): void {
     if(clearToken) {
       this.clearToken();
     }

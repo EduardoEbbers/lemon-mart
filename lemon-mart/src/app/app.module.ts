@@ -12,9 +12,10 @@ import { PosModule } from './pos/pos.module';
 import { UserModule } from './user/user.module';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 import { InMemoryAuthService } from './auth/in-memory-auth/auth.inmemory.service';
+import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { InMemoryAuthService } from './auth/in-memory-auth/auth.inmemory.service
     HttpClientModule
   ],
   providers: [
-    { provide: AuthService, useClass: InMemoryAuthService }
+    { provide: AuthService, useClass: InMemoryAuthService },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
