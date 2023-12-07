@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "lemon-90f60"
+  },
+  "targets": {
+    "lemon-90f60": {
+      "hosting": {
+        "lemon-mart": [
+          "lemon-90f60"
+        ]
+      }
+    }
+  }
+}
